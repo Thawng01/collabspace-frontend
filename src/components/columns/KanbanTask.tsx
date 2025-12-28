@@ -75,6 +75,8 @@ const KanbanTask: React.FC<KanbanTaskProps> = ({ task, projectId }) => {
         }
     };
 
+    console.log("task : ", task)
+
     const isOverdue = task.dueDate && new Date() > task.dueDate;
 
     return (
@@ -150,25 +152,25 @@ const KanbanTask: React.FC<KanbanTaskProps> = ({ task, projectId }) => {
 
             {task.description && (
                 <p className="text-xs text-gray-600 mb-3 line-clamp-2">
-                    {task.description}
+                    {task.description.length > 50 ? task.description.slice(0, 50) + "..." : task.description}
                 </p>
             )}
 
             {task.labels && task.labels.length > 0 && (
                 <div className="flex flex-wrap gap-1 mb-3">
-                    {task.labels.map((label) => (
-                        <span
+                    {task.labels.map((label) => {    
+                        return <span
                             key={label.id}
                             className="px-2 py-1 text-xs rounded-full font-medium"
                             style={{
-                                backgroundColor: `${label.color}20`,
-                                color: label.color,
-                                border: `1px solid ${label.color}40`,
+                                backgroundColor: `${label.label.color}20`,
+                                color: label.label.color,
+                            
                             }}
                         >
-                            {label.name}
+                            {label.label.name}
                         </span>
-                    ))}
+                    })}
                 </div>
             )}
 

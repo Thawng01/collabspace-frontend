@@ -10,7 +10,7 @@ interface ProjectCardProps {
     project: Project;
     viewMode: "grid" | "list";
     progressColor: string;
-    selectedWorkspace: string;
+    selectedWorkspace?: string;
 }
 
 export const ProjectCard: React.FC<ProjectCardProps> = ({
@@ -54,7 +54,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
                         <div className="flex-1">
                             <div className="flex items-center gap-3 mb-1">
                                 <Link
-                                    to={`/${project.workspaceId}/projects/columns/${project.id}`}
+                                    to={`/${project.name}/${project.workspaceId}/projects/columns/${project.id}`}
                                     className="font-semibold text-gray-900 text-lg"
                                 >
                                     {project.name}
@@ -108,7 +108,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
                         </div>
                         <ProjectAction
                             project={project}
-                            selectedWorkspace={selectedWorkspace}
+                            // selectedWorkspace={selectedWorkspace}
                         />
                     </div>
                 </div>
@@ -127,7 +127,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
                 <div className="flex justify-between items-start mb-4">
                     <div>
                         <Link
-                            to={`/${project.workspaceId}/projects/columns/${project.id}`}
+                            to={`/${project.name}/${project.workspaceId}/projects/columns/${project.id}`}
                             className="font-bold text-gray-900 text-lg mb-1 block"
                         >
                             {project.name}

@@ -10,12 +10,14 @@ import ProtectedRoute from "./components/shared/ProtectedRoute";
 import ProfileSetting from "./pages/profiles/ProfileSetting";
 import ProfilePage from "./pages/profiles/ProfilePage";
 import Workspace from "./pages/workspaces/Workspace";
-import WorkSpaceDetail from "./pages/workspaces/WorkSpaceDetail";
+
 import ProjectDetail from "./pages/projects/ProjectDetail";
 import ColumnPage from "./pages/columns/ColumnPage";
 import ProjectPage from "./pages/projects/Project";
 import TaskDetails from "./pages/tasks/TaskDetails";
 import ActivityPage from "./pages/activity/ActivityPage";
+import { WorkSpaceDetail } from "./pages/workspaces/WorkSpaceDetail";
+import Dashboard from "./pages/dashboard/Dashboard";
 
 const routes = createBrowserRouter([
     {
@@ -31,11 +33,15 @@ const routes = createBrowserRouter([
                 element: <Home />,
             },
             {
+                path: "/dashboard",
+                element: <Dashboard />,
+            },
+            {
                 path: "/workspace",
                 element: <Workspace />,
             },
             {
-                path: "/workspace/details/:id",
+                path: "/workspace/:name/:id",
                 element: <WorkSpaceDetail />,
             },
             {
@@ -47,7 +53,7 @@ const routes = createBrowserRouter([
                 element: <ProjectDetail />,
             },
             {
-                path: "/:workspaceId/projects/columns/:id",
+                path: "/:name/:workspaceId/projects/columns/:id",
                 element: <ColumnPage />,
             },
 

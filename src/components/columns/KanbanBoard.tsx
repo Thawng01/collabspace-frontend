@@ -20,22 +20,23 @@ import KanbanColumn from "./KanbanColumn";
 import { NewColumn } from "./NewColumn";
 import useFetch from "../../hooks/useFetch";
 import { useUpdate } from "../../hooks/useUpdate";
+import { useParams } from "react-router";
 
 const KanbanBoard = ({ projectId }: { projectId: string }) => {
     const [tasks, setTasks] = useState<any[]>([]);
     const [activeTask, setActiveTask] = useState<any | null>(null);
 
+   const {name} = useParams()
+
     const { data: columns, isLoading } = useFetch(
         `/projects/columns/${projectId}`
     );
 
-    const { data } = useFetch(`/projects/columns/tasks/index`);
+    const { data } = useFetch(`/projects/columns/tasks/index/${projectId}`);
 
     const { mutate: updateTask, error} = useUpdate(
         "/projects/columns/tasks/update-task"
     );
-
-    console.log("task error : ", error)
 
     const sensors = useSensors(
         useSensor(PointerSensor, {
@@ -123,7 +124,7 @@ const KanbanBoard = ({ projectId }: { projectId: string }) => {
             <div className="flex items-center justify-between mb-6">
                 <div>
                     <h1 className="text-2xl font-bold text-gray-900">
-                        Website Redesign
+                    {name}
                     </h1>
                     <p className="text-gray-600">
                         Manage your project tasks efficiently

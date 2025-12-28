@@ -18,7 +18,7 @@ const RootLayout = () => {
             title: "New task assigned",
             message: 'You have been assigned to "Fix login page"',
             read: false,
-            timestamp: new Date(Date.now() - 1000 * 60 * 30), // 30 minutes ago
+            createdAt: new Date(Date.now() - 1000 * 60 * 30), // 30 minutes ago
             taskId: "task-123",
         },
         {
@@ -27,7 +27,7 @@ const RootLayout = () => {
             title: "You were mentioned",
             message: "Sarah mentioned you in a comment",
             read: true,
-            timestamp: new Date(Date.now() - 1000 * 60 * 60 * 2), // 2 hours ago
+            createdAt: new Date(Date.now() - 1000 * 60 * 60 * 2), // 2 hours ago
             taskId: "task-456",
         },
     ];

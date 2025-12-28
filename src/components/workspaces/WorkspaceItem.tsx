@@ -33,7 +33,7 @@ const WorkspaceItem: React.FC<WorkspaceItemProps> = ({ workspace }) => {
         <div className="group bg-white rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 p-6 hover:border-blue-200">
             <div className="flex items-start justify-between mb-4">
                 <Link
-                    to={`/workspace/details/${workspace.id}`}
+                    to={`/workspace/${workspace.name}/${workspace.id}`}
                     className="flex items-center space-x-3"
                 >
                     <div className="w-10 h-10 bg-gradient-to-r from-blue-400 to-purple-700 rounded-full flex items-center justify-center">

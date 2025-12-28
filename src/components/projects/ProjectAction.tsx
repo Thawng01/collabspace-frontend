@@ -11,7 +11,7 @@ export function ProjectAction({
     selectedWorkspace,
 }: {
     project: Project;
-    selectedWorkspace: string;
+    selectedWorkspace?: string;
 }) {
     const [open, setOpen] = useState(false);
     return (

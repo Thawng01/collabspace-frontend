@@ -32,7 +32,7 @@ export interface Notification {
     title: string;
     message: string;
     read: boolean;
-    timestamp: Date;
+    createdAt: Date;
     taskId?: string;
 }
 
@@ -123,9 +123,13 @@ export interface Task {
         avatar?: string;
     };
     labels?: {
-        id: string;
-        name: string;
-        color: string;
+        id: string
+        label: {
+
+            id: string;
+            name: string;
+            color: string;
+        }
     }[];
     comments: Comment[]
     attachments: any[]
@@ -188,9 +192,8 @@ export interface UpdateColumnData {
 
 export interface Activity {
     id: string;
-    title: string;
-    description?: string;
-    type: string;
+    action: "COMMENT" | "TASK_UPDATE" | "STATUS_CHANGE" | "PRIORITY_CHANGE"
+    details?: string;
     createdAt: Date;
     projectId: string;
 }
