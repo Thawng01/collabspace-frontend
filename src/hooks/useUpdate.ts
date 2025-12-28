@@ -4,12 +4,17 @@ import { useAuth } from '../contexts/AuthContext'
 export const useUpdate = (url: string, callback?: (value: any) => void) => {
     const { token } = useAuth()
     const updateItem = async (data: any) => {
-        const res = await clientApi.put(url, data, {
+        try {
+            const res = await clientApi.put(url, data, {
             headers: {
                 "x-auth-token": token
             }
         })
         return res.data
+        } catch (error) {
+            console.log("hello error : ", error)
+        }
+        
     }
 
     return useMutation<any, any, any>({

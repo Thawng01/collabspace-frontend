@@ -4,7 +4,7 @@ import { useAuth } from '../contexts/AuthContext'
 import { useQuery } from '@tanstack/react-query'
 
 const useFetch = (url: string) => {
-    console.log('run')
+
     const { token } = useAuth()
     const fetchItem = async () => {
         const res = await clientApi.get(url, {

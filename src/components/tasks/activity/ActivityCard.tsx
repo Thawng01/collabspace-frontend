@@ -12,7 +12,7 @@ import {
 } from "lucide-react";
 import useFetch from "../../../hooks/useFetch";
 import type { Activity as ActivityType } from "../../../types";
-import { Link } from "react-router";
+import { Link, useLocation, useParams, useSearchParams } from "react-router";
 import { useState, useEffect } from "react";
 import { cn } from "../../../lib/utils"; // Assuming you have a cn utility
 
@@ -56,7 +56,6 @@ interface ActivityCardProps {
 }
 
 const ActivityCard = ({ taskId, className }: ActivityCardProps) => {
-    const [shouldRefetch, setShouldRefetch] = useState(false);
 
     const {
         data: activities,
@@ -71,6 +70,8 @@ const ActivityCard = ({ taskId, className }: ActivityCardProps) => {
         error: userError,
     } = useFetch(`/users/me`);
 
+   const {projectId, columnId} = useParams()
+   
     // Handle refetch on component mount or when taskId changes
     useEffect(() => {
         refetchActivities();
@@ -80,9 +81,6 @@ const ActivityCard = ({ taskId, className }: ActivityCardProps) => {
         refetchActivities();
     };
 
-    const toggleAutoRefresh = () => {
-        setShouldRefetch(!shouldRefetch);
-    };
 
     // Loading state
     if (isActivitiesLoading || isUserLoading) {
@@ -191,7 +189,7 @@ const ActivityCard = ({ taskId, className }: ActivityCardProps) => {
                 <div className="flex items-center gap-3">
                     {activities.length > 2 && (
                         <Link
-                            to={`/tasks/${taskId}/activity`}
+                            to={`/projects/${projectId}/columns/${columnId}/tasks/${taskId}/activities`}
                             className="flex items-center gap-2 px-3 py-1.5 bg-blue-50 text-blue-600 rounded-lg hover:bg-blue-100 hover:text-blue-700 transition-colors"
                         >
                             <span className="text-xs font-medium">

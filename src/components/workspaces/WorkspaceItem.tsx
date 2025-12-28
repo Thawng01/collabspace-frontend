@@ -3,6 +3,8 @@ import type { Label, Workspace } from "../../types";
 import { Action } from "./Action";
 import { Link } from "react-router";
 import MemberList from "./MemberList";
+import { useAuth } from "../../contexts/AuthContext";
+import useFetch from "../../hooks/useFetch";
 
 const formatMemberCount = (count: number) => {
     if (count >= 1000) return `${(count / 1000).toFixed(1)}k`;
@@ -13,15 +15,19 @@ interface WorkspaceItemProps {
 }
 
 const WorkspaceItem: React.FC<WorkspaceItemProps> = ({ workspace }) => {
+    
+   const { data: user } = useFetch("/users/me");
     const getRoleColor = (role: string) => {
         const colors = {
-            owner: "bg-purple-100 text-purple-800",
-            admin: "bg-blue-100 text-blue-800",
-            member: "bg-green-100 text-green-800",
-            viewer: "bg-gray-100 text-gray-800",
+            OWNER: "bg-purple-100 text-purple-800",
+            ADMIN: "bg-blue-100 text-blue-800",
+            MEMBER: "bg-green-100 text-green-800",
+            VIEWER: "bg-gray-100 text-gray-800",
         };
-        return colors[role as keyof typeof colors] || colors.viewer;
+        return colors[role as keyof typeof colors] || colors.VIEWER;
     };
+
+    const filteredMember = workspace.members?.filter(member => member.user.id === user?.id )
 
     return (
         <div className="group bg-white rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 p-6 hover:border-blue-200">
@@ -40,12 +46,13 @@ const WorkspaceItem: React.FC<WorkspaceItemProps> = ({ workspace }) => {
                             {workspace?.name}
                         </h3>
                         <div className="flex items-center space-x-2 mt-1">
+                            
                             <span
                                 className={`px-2 py-1 rounded-full text-xs font-medium ${getRoleColor(
-                                    "owner"
+                                    filteredMember[0].role
                                 )}`}
                             >
-                                Owner
+                                {filteredMember[0].role}
                             </span>
                         </div>
                     </div>

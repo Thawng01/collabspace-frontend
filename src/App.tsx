@@ -15,6 +15,7 @@ import ProjectDetail from "./pages/projects/ProjectDetail";
 import ColumnPage from "./pages/columns/ColumnPage";
 import ProjectPage from "./pages/projects/Project";
 import TaskDetails from "./pages/tasks/TaskDetails";
+import ActivityPage from "./pages/activity/ActivityPage";
 
 const routes = createBrowserRouter([
     {
@@ -53,6 +54,10 @@ const routes = createBrowserRouter([
             {
                 path: "/projects/:projectId/columns/:columnId/tasks/:id",
                 element: <TaskDetails />,
+            },
+            {
+                path: "/projects/:projectId/columns/:columnId/tasks/:id/activities",
+                element: <ActivityPage />,
             },
 
             {

@@ -113,7 +113,7 @@ const MemberList = ({ workspace }: { workspace: Workspace }) => {
                                     </div>
                                 </div>
 
-                                {user?.id !== member.user.id && (
+                                {user?.id !== member.user.id && member?.role !== "OWNER" && (
                                     <Button
                                         onClick={() =>
                                             deleteItem({ id: member.id })

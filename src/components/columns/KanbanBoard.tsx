@@ -31,9 +31,11 @@ const KanbanBoard = ({ projectId }: { projectId: string }) => {
 
     const { data } = useFetch(`/projects/columns/tasks/index`);
 
-    const { mutate: updateTask } = useUpdate(
+    const { mutate: updateTask, error} = useUpdate(
         "/projects/columns/tasks/update-task"
     );
+
+    console.log("task error : ", error)
 
     const sensors = useSensors(
         useSensor(PointerSensor, {
@@ -82,8 +84,8 @@ const KanbanBoard = ({ projectId }: { projectId: string }) => {
                         : task
                 )
             );
-
-            updateTask({ columnId: overColumn.id, taskId: activeId });
+  updateTask({ columnId: overColumn.id, taskId: activeId });
+          
         }
     };
 

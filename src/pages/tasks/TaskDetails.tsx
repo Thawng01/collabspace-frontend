@@ -22,6 +22,7 @@ import Comments from "../../components/tasks/comments/Comments";
 import ActivityCard from "../../components/tasks/activity/ActivityCard";
 import { useUpdate } from "../../hooks/useUpdate";
 import { useQueryClient } from "@tanstack/react-query";
+import { priorityOptions, statusOptions } from "../../utils/constant";
 
 export default function TaskDetailsPage() {
     const params = useParams();
@@ -120,48 +121,6 @@ export default function TaskDetailsPage() {
         return <FileText className="w-5 h-5 text-gray-500" />;
     };
 
-    const statusOptions: Array<{
-        value: TaskStatus;
-        label: string;
-        color: string;
-    }> = [
-        {
-            value: "BACKLOG",
-            label: "Backlog",
-            color: "bg-gray-100 text-skyblue-600",
-        },
-        { value: "TODO", label: "To Do", color: "bg-blue-100 text-blue-600" },
-        {
-            value: "IN_PROGRESS",
-            label: "In Progress",
-            color: "bg-yellow-100 text-yellow-600",
-        },
-        {
-            value: "IN_REVIEW",
-            label: "Review",
-            color: "bg-purple-100 text-purple-800",
-        },
-        { value: "DONE", label: "Done", color: "bg-green-100 text-green-600" },
-    ];
-
-    const priorityOptions: Array<{
-        value: Priority;
-        label: string;
-        color: string;
-    }> = [
-        { value: "LOW", label: "Low", color: "bg-purple-100 text-purple-600" },
-        {
-            value: "MEDIUM",
-            label: "Medium",
-            color: "bg-blue-100 text-blue-800",
-        },
-        {
-            value: "HIGH",
-            label: "High",
-            color: "bg-orange-100 text-orange-700",
-        },
-        { value: "URGENT", label: "Urgent", color: "bg-red-100 text-red-700" },
-    ];
 
     if (isLoading) return;
 
@@ -401,9 +360,9 @@ export default function TaskDetailsPage() {
                                         Labels
                                     </label>
                                     <div className="flex flex-wrap gap-2">
-                                        {task.labels?.map((l: TaskLabel) => (
+                                        {task.labels?.map((l: TaskLabel, index: number) => (
                                             <span
-                                                key={l.id}
+                                                key={l.id+index}
                                                 className="px-3 py-1.5 rounded-full text-sm font-medium"
                                                 style={{
                                                     backgroundColor: `${l.label.color}20`,

@@ -169,9 +169,9 @@ export interface Attactment {
     createdAt: Date
 }
 
-export interface Activity {
+export interface ActivityData {
     id: string
-    action: string,
+    action: "COMMENT" | "TASK_UPDATE" | "STATUS_CHANGE" | "PRIORITY_CHANGE"
     details: string
     createdAt: Date
     user: User
