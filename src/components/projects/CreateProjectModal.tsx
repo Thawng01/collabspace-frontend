@@ -27,6 +27,7 @@ import {
     SelectValue,
 } from "../ui/select";
 import ColorPicker from "./ColorPicker";
+import { useParams } from "react-router";
 
 export function CreateProjectModal({
     project,
@@ -35,6 +36,7 @@ export function CreateProjectModal({
     project?: Project;
     params?: string;
 }) {
+    const {id} = useParams()
     const [open, setOpen] = useState(false);
     const [formData, setFormData] = useState({
         name: project?.name || "",
@@ -43,7 +45,7 @@ export function CreateProjectModal({
     });
 
     const [selectedWorkspace, setSelectedWorkspace] = useState(
-        project?.workspaceId || ""
+        project?.workspaceId || id || ""
     );
 
     const { data: workspaces } = useFetch("/workspaces");
@@ -171,8 +173,8 @@ export function CreateProjectModal({
                         <div className="grid gap-3">
                             <Label htmlFor="role">Workspace</Label>
                             <Select
-                                disabled={project ? true : false}
-                                defaultValue="kfjdsfklj"
+                                disabled={project || id ? true : false}
+                            
                                 value={selectedWorkspace}
                                 onValueChange={(value) =>
                                     setSelectedWorkspace(value)

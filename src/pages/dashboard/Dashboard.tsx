@@ -1,23 +1,14 @@
-import React, { useState } from 'react';
+
 import {
   BarChart3,
-  Calendar,
+
   CheckSquare,
   Clock,
-  FolderKanban,
-  Home,
   Inbox,
-  LayoutDashboard,
-  Menu,
-  MessageSquare,
-  Package,
-  Settings,
-  Users,
-  X
+ 
 } from 'lucide-react';
 import type { DashboardStats } from '../../components/dashboard/TaskOverview';
 import type { Activity } from '../../types';
-import NotificationsPanel from '../../components/dashboard/NotificationPanel';
 import QuickActions from '../../components/dashboard/QuickActions';
 import StatCard from '../../components/dashboard/StatCard';
 import ProjectsOverview from '../../components/dashboard/ProjectsOverview';
@@ -31,9 +22,9 @@ const Dashboard = () => {
   
 
   const {data: statsCard, isLoading } = useFetch("/dashboard")
-  const {data : project} = useFetch("/dashboard/projects")
 
-  console.log("dashboard projects: ", project)
+
+
   // Mock data - replace with actual API calls
   const stats: DashboardStats = {
     totalTasks: 128,
@@ -106,28 +97,28 @@ const Dashboard = () => {
               <StatCard
                 title="Total Tasks"
                 value={statsCard?.totalTasks.toString()}
-                change="+12% from last month"
+                change={statsCard?.percentageChanges.totalTasks}
                 icon={CheckSquare}
                 color="blue"
               />
               <StatCard
                 title="Completed"
                 value={statsCard?.totalCompleted.toString()}
-                change="+8% from last month"
+                change={statsCard?.percentageChanges.totalCompleted}
                 icon={BarChart3}
                 color="green"
               />
               <StatCard
                 title="In Progress"
                 value={statsCard?.totalInProgress.toString()}
-                change="+5% from last month"
+                change={statsCard?.percentageChanges.totalInProgress}
                 icon={Clock}
                 color="yellow"
               />
               <StatCard
                 title="Overdue"
                 value={statsCard?.overDue?.length || 0}
-                change="+2% from last month"
+                // change={statsCard?.overDue?.length}
                 icon={Inbox}
                 color="red"
               />
@@ -137,7 +128,7 @@ const Dashboard = () => {
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
               {/* Projects Overview */}
               <div className="lg:col-span-2">
-                <ProjectsOverview projects={projects} />
+                <ProjectsOverview />
               </div>
 
               {/* Recent Activities */}

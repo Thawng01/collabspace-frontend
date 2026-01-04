@@ -1,9 +1,8 @@
 import { useParams } from "react-router";
-// components/ProjectsPage.tsx
-import React, { useState, useMemo } from "react";
+import { useState, useMemo } from "react";
 
-import { Search, Filter, Grid, List, Calendar } from "lucide-react";
-import type { Project, Workspace } from "../../types";
+import { Search, Grid, List, Calendar } from "lucide-react";
+import type { Project} from "../../types";
 import { CreateProjectModal } from "../../components/projects/CreateProjectModal";
 import { ProjectSort } from "../../components/projects/ProjectSort";
 import { ProjectCard } from "../../components/projects/ProjectCard";

@@ -4,7 +4,7 @@ import { type LucideIcon } from 'lucide-react';
 interface StatCardProps {
   title: string;
   value: string;
-  change: string;
+  change?: string;
   icon: LucideIcon;
   color: 'blue' | 'green' | 'yellow' | 'red';
 }
@@ -30,7 +30,7 @@ const StatCard: React.FC<StatCardProps> = ({ title, value, change, icon: Icon, c
         <div>
           <p className="text-sm text-gray-600 mb-1">{title}</p>
           <p className="text-3xl font-bold text-gray-900">{value}</p>
-          <p className={`text-sm mt-2 ${change.startsWith('+') ? 'text-green-600' : 'text-red-600'}`}>
+          <p className={`text-sm mt-2 ${change?.startsWith('+') ? 'text-green-600' : 'text-red-600'}`}>
             {change}
           </p>
         </div>
