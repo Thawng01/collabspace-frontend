@@ -11,6 +11,7 @@ import {
 } from 'lucide-react';
 import { format } from 'date-fns';
 import useFetch from '../../hooks/useFetch';
+import { Link } from 'react-router';
 
 const ProjectsOverview = () => {
   const { 
@@ -25,13 +26,6 @@ const ProjectsOverview = () => {
     if (progress >= 60) return 'bg-blue-500';
     if (progress >= 40) return 'bg-yellow-500';
     return 'bg-red-500';
-  };
-
-  // Calculate progress based on completed tasks (mock for now - you can implement real logic)
-  const calculateProjectProgress = (project: Project) => {
-    // Mock progress - replace with actual logic from your backend
-    // Example: return project.totalTasks > 0 ? Math.round((project.completedTasks / project.totalTasks) * 100) : 0;
-    return Math.floor(Math.random() * 100);
   };
 
   // Loading skeleton
@@ -110,7 +104,7 @@ const ProjectsOverview = () => {
   const renderProjectsGrid = () => (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
       {projects?.map((project: Project) => {
-        const progress = calculateProjectProgress(project);
+      
         
         return (
           <div 
@@ -129,29 +123,21 @@ const ProjectsOverview = () => {
                   />
                 </div>
                 <div className="min-w-0">
-                  <h3 className="font-medium text-gray-900 truncate">{project.name}</h3>
+                  <h3 className="font-medium text-gray-900 truncate">{project.name?.length > 20 ? project.name.slice(0,20) + "..." : project.name}</h3>
                   <p className="text-xs text-gray-500 truncate">
-                    {project.description || 'No description'}
+                    {project.description && project?.description?.length > 35 ? project.description?.slice(0, 35) +"..." : project.description || 'No description'}
                   </p>
                 </div>
               </div>
               <ArrowRight className="w-4 h-4 text-gray-400 opacity-0 group-hover:opacity-100 transition-opacity" />
             </div>
             
-            <div className="mb-4">
-              <div className="flex justify-between text-sm mb-1">
-                <span className="text-gray-600">Progress</span>
-                <span className="font-medium" style={{ color: project.color || '#3B82F6' }}>
-                  {progress}%
-                </span>
+            <div className='items-center flex'>
+              <div className={` px-5 py-1 rounded-full text-sm mb-4`} style={{ backgroundColor: `${project.color}20` }}>
+                <span className="text-white font-medium" style={{color: project.color}}>{project.workspace.name?.length > 30 ? project.workspace.name.slice(0,30) + "...": project.workspace.name}</span>
               </div>
-              <div className="w-full bg-gray-100 rounded-full h-2 overflow-hidden">
-                <div 
-                  className={`h-2 rounded-full transition-all duration-500 ${getProgressColor(progress)}`}
-                  style={{ width: `${progress}%` }}
-                />
               </div>
-            </div>
+          
             
             <div className="flex items-center justify-between text-sm text-gray-600 pt-3 border-t border-gray-100">
               <div className="flex items-center" title="Team members">
@@ -188,10 +174,10 @@ const ProjectsOverview = () => {
           </p>
         </div>
         {!isLoading && !error && projects.length > 0 && (
-          <button className="text-sm font-medium text-blue-600 hover:text-blue-700 flex items-center transition-colors">
+          <Link to={`/projects`} className="text-sm font-medium text-blue-600 hover:text-blue-700 flex items-center transition-colors">
             View all projects
             <ArrowRight className="w-4 h-4 ml-1" />
-          </button>
+          </Link>
         )}
       </div>
       

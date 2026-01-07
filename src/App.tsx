@@ -18,6 +18,7 @@ import TaskDetails from "./pages/tasks/TaskDetails";
 import ActivityPage from "./pages/activity/ActivityPage";
 import { WorkSpaceDetail } from "./pages/workspaces/WorkSpaceDetail";
 import Dashboard from "./pages/dashboard/Dashboard";
+import AllProjects from "./pages/projects/AllProjects";
 
 const routes = createBrowserRouter([
     {
@@ -47,6 +48,10 @@ const routes = createBrowserRouter([
             {
                 path: "/projects",
                 element: <ProjectPage />,
+            },
+            {
+                path: "/projects/all",
+                element: <AllProjects />,
             },
             {
                 path: "/projects/details/:id",
