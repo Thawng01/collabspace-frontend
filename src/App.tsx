@@ -18,88 +18,94 @@ import TaskDetails from "./pages/tasks/TaskDetails";
 import ActivityPage from "./pages/activity/ActivityPage";
 import { WorkSpaceDetail } from "./pages/workspaces/WorkSpaceDetail";
 import Dashboard from "./pages/dashboard/Dashboard";
-import AllProjects from "./pages/projects/AllProjects";
+import SettingPage from "./pages/workspaces/SettingPage";
+import TeamPage from "./pages/team/TeamPage";
 
 const routes = createBrowserRouter([
-    {
-        path: "/",
-        element: (
-            <ProtectedRoute>
-                <RootLayout />
-            </ProtectedRoute>
-        ),
-        children: [
-            {
-                index: true,
-                element: <Home />,
-            },
-            {
-                path: "/dashboard",
-                element: <Dashboard />,
-            },
-            {
-                path: "/workspace",
-                element: <Workspace />,
-            },
-            {
-                path: "/workspace/:name/:id",
-                element: <WorkSpaceDetail />,
-            },
-            {
-                path: "/projects",
-                element: <ProjectPage />,
-            },
-            {
-                path: "/projects/all",
-                element: <AllProjects />,
-            },
-            {
-                path: "/projects/details/:id",
-                element: <ProjectDetail />,
-            },
-            {
-                path: "/:name/:workspaceId/projects/columns/:id",
-                element: <ColumnPage />,
-            },
+  {
+    path: "/",
+    element: (
+      <ProtectedRoute>
+        <RootLayout />
+      </ProtectedRoute>
+    ),
+    children: [
+      {
+        index: true,
+        element: <Home />,
+      },
+      {
+        path: "/dashboard",
+        element: <Dashboard />,
+      },
+      {
+        path: "/workspace",
+        element: <Workspace />,
+      },
+      {
+        path: "/workspace/:name/:id",
+        element: <WorkSpaceDetail />,
+      },
+      {
+        path: "/workspace/:name/:id/setting",
+        element: <SettingPage />,
+      },
+      {
+        path: "/projects",
+        element: <ProjectPage />,
+      },
 
-            {
-                path: "/projects/:projectId/columns/:columnId/tasks/:id",
-                element: <TaskDetails />,
-            },
-            {
-                path: "/projects/:projectId/columns/:columnId/tasks/:id/activities",
-                element: <ActivityPage />,
-            },
+      {
+        path: "/projects/details/:id",
+        element: <ProjectDetail />,
+      },
+      {
+        path: "/:name/:workspaceId/projects/columns/:id",
+        element: <ColumnPage />,
+      },
 
-            {
-                path: "/profile/:userId/setting",
-                element: <ProfileSetting />,
-            },
-            {
-                path: "/profile/:userId",
-                element: <ProfilePage />,
-            },
-        ],
-    },
+      {
+        path: "/projects/:projectId/columns/:columnId/tasks/:id",
+        element: <TaskDetails />,
+      },
+      {
+        path: "/projects/:projectId/columns/:columnId/tasks/:id/activities",
+        element: <ActivityPage />,
+      },
 
-    {
-        path: "/",
-        element: <AuthLayout />,
-        children: [
-            {
-                path: "/landing",
-                element: <Landing />,
-            },
-            {
-                path: "/login",
-                element: <LoginPage />,
-            },
-            {
-                path: "/register",
-                element: <RegisterPage />,
-            },
-        ],
-    },
+      {
+        path: "/profile/:userId/setting",
+        element: <ProfileSetting />,
+      },
+      {
+        path: "/profile/:userId",
+        element: <ProfilePage />,
+      },
+      {
+        path: "/teams",
+        element: <TeamPage />,
+      },
+    ],
+  },
+
+  {
+    path: "/",
+    element: <AuthLayout />,
+    children: [
+      {
+        path: "/landing",
+        element: <Landing />,
+      },
+      {
+        path: "/login",
+        element: <LoginPage />,
+      },
+      {
+        path: "/register",
+        element: <RegisterPage />,
+      },
+    ],
+  },
 ]);
 
 export default routes;
