@@ -30,6 +30,7 @@ import {
   DropdownMenuTrigger,
 } from "../../components/ui/dropdown-menu";
 import CustomButton from "../../components/shared/CustomButton";
+import useFetch from "../../hooks/useFetch";
 
 // types/team.ts
 export interface TeamMember {
@@ -69,6 +70,10 @@ const TeamPage = () => {
   );
   const [filterWorkspace, setFilterWorkspace] = useState<string>("all");
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
+
+  const { data } = useFetch("/workspaces/members");
+  const { data: workspaces } = useFetch("/workspaces/name");
+  console.log("teams : ", workspaces);
 
   // Sample data - replace with your actual data from props
   const [teamMembers, setTeamMembers] = useState<TeamMember[]>([
